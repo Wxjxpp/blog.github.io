@@ -18,7 +18,82 @@
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
 <title>Blog测试</title>
 
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+    // ===== Visitor Counter (Vercount) =====
+    var postBody=document.getElementById('postBody');
+    if(postBody){
+        postBody.insertAdjacentHTML('afterend','<div id="busuanzi_container_page_pv" style="display:none;float:left;margin-top:8px;font-size:small;">本文浏览量 <span id="busuanzi_value_page_pv"></span> 次</div>');
+    }
+    var runday=document.getElementById('runday');
+    if(runday){
+        runday.insertAdjacentHTML('afterend','<span id="busuanzi_container_site_pv" style="display:none">总浏览量 <span id="busuanzi_value_site_pv"></span> 次 • </span>');
+        runday.insertAdjacentHTML('afterend','<span id="busuanzi_container_site_uv" style="display:none">访客数 <span id="busuanzi_value_site_uv"></span> • </span>');
+        var vc=document.createElement('script');
+        vc.src='https://vercount.one/js';
+        vc.async=true;
+        document.head.appendChild(vc);
+    }
 
+    // ===== Share buttons (only on post pages) =====
+    if(postBody){
+        var shareBox=document.createElement('div');
+        shareBox.id='share-box';
+        shareBox.style.cssText='margin-top:24px;padding:16px 0;border-top:1px solid var(--color-border-muted, #d0d7de);text-align:center;font-size:small;clear:both;';
+        shareBox.innerHTML='<span style="margin-right:8px;color:var(--color-fg-muted);">分享到:</span>'+
+            '<a class="btn btn-invisible" href="javascript:shareWebShare()" title="分享" style="font-size:small;">分享</a>'+
+            '<a class="btn btn-invisible" href="javascript:shareTo(\'weibo\')" title="微博" style="font-size:small;">微博</a>'+
+            '<a class="btn btn-invisible" href="javascript:shareTo(\'twitter\')" title="Twitter" style="font-size:small;">Twitter</a>'+
+            '<a class="btn btn-invisible" href="javascript:shareTo(\'facebook\')" title="Facebook" style="font-size:small;">Facebook</a>'+
+            '<a class="btn btn-invisible" href="javascript:copyShareLink()" title="复制链接" style="font-size:small;">复制链接</a>';
+        var bottomDiv=postBody.nextElementSibling;
+        if(bottomDiv && bottomDiv.getAttribute('style') && bottomDiv.getAttribute('style').indexOf('float:right')!==-1){
+            bottomDiv.insertAdjacentElement('afterend',shareBox);
+        }else{
+            postBody.insertAdjacentElement('afterend',shareBox);
+        }
+    }
+});
+function shareWebShare(){
+    if(navigator.share){
+        var desc='';
+        var metaDesc=document.querySelector('meta[name="description"]');
+        if(metaDesc){desc=metaDesc.getAttribute('content')||'';}
+        navigator.share({title:document.title,url:window.location.href,text:desc}).catch(function(err){console.log('Share canceled:',err);});
+    }else{
+        copyShareLink();
+    }
+}
+function shareTo(platform){
+    var url=encodeURIComponent(window.location.href);
+    var title=encodeURIComponent(document.title);
+    var shareUrl='';
+    if(platform==='weibo'){shareUrl='https://service.weibo.com/share/share.php?url='+url+'&title='+title;}
+    else if(platform==='twitter'){shareUrl='https://twitter.com/intent/tweet?url='+url+'&text='+title;}
+    else if(platform==='facebook'){shareUrl='https://www.facebook.com/sharer/sharer.php?u='+url;}
+    if(shareUrl){window.open(shareUrl,'_blank','width=600,height=500,menubar=no,toolbar=no');}
+}
+function copyShareLink(){
+    var url=window.location.href;
+    if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(url).then(function(){
+            alert('链接已复制\n'+url);
+        }).catch(function(){fallbackCopy(url);});
+    }else{
+        fallbackCopy(url);
+    }
+}
+function fallbackCopy(url){
+    var textarea=document.createElement('textarea');
+    textarea.value=url;
+    textarea.style.position='fixed';
+    textarea.style.opacity='0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try{document.execCommand('copy');alert('链接已复制\n'+url);}catch(e){prompt('请复制下面的链接:',url);}
+    document.body.removeChild(textarea);
+}
+</script>
 
 </head>
 <style>

@@ -18,6 +18,66 @@
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
 <title>Blog Title</title>
 
+<style>
+#hitokoto-container{margin-bottom:16px;padding:12px 16px;background-color:var(--color-canvas-subtle,#f6f8fa);border-left:3px solid #0969da;border-radius:4px;font-size:14px;line-height:1.6;color:var(--color-fg-muted,#57606a);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+#hitokoto-text{flex:1;min-width:0;font-style:italic;}
+#hitokoto-from{font-size:12px;color:var(--color-fg-subtle,#6e7781);}
+#hitokoto-refresh{cursor:pointer;color:#0969da;font-size:12px;white-space:nowrap;user-select:none;}
+#hitokoto-refresh:hover{text-decoration:underline;}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+    var content=document.getElementById('content');
+    if(!content){return;}
+    var hitokotoContainer=document.createElement('div');
+    hitokotoContainer.id='hitokoto-container';
+    hitokotoContainer.innerHTML='<span id="hitokoto-text">加载中...</span><span id="hitokoto-from"></span><span id="hitokoto-refresh" onclick="loadHitokoto()">换一句</span>';
+    var firstDiv=content.querySelector('div');
+    if(firstDiv){
+        firstDiv.insertAdjacentElement('afterend',hitokotoContainer);
+    }else{
+        content.insertBefore(hitokotoContainer,content.firstChild);
+    }
+    loadHitokoto();
+});
+function loadHitokoto(){
+    var textEl=document.getElementById('hitokoto-text');
+    var fromEl=document.getElementById('hitokoto-from');
+    if(!textEl){return;}
+    var xhr=new XMLHttpRequest();
+    xhr.open('GET','https://v1.hitokoto.cn/?encode=json&c=d&c=i&c=k');
+    xhr.responseType='text';
+    xhr.timeout=5000;
+    xhr.onload=function(){
+        try{
+            var data=JSON.parse(xhr.response);
+            textEl.textContent=data.hitokoto||'生活总会有希望。';
+            fromEl.textContent=data.from?('—— '+data.from):'';
+        }catch(e){
+            textEl.textContent='人生如逆旅，我亦是行人。';
+            fromEl.textContent='—— 苏轼';
+        }
+    };
+    xhr.onerror=xhr.ontimeout=function(){
+        textEl.textContent='人生如逆旅，我亦是行人。';
+        fromEl.textContent='—— 苏轼';
+    };
+    xhr.send();
+}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+    var runday=document.getElementById('runday');
+    if(runday){
+        runday.insertAdjacentHTML('afterend','<span id="busuanzi_container_site_pv" style="display:none">总浏览量 <span id="busuanzi_value_site_pv"></span> 次 • </span>');
+        runday.insertAdjacentHTML('afterend','<span id="busuanzi_container_site_uv" style="display:none">访客数 <span id="busuanzi_value_site_uv"></span> • </span>');
+        var vc=document.createElement('script');
+        vc.src='https://vercount.one/js';
+        vc.async=true;
+        document.head.appendChild(vc);
+    }
+});
+</script>
 </head>
 <style>
 body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
