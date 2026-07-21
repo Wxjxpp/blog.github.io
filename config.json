@@ -3,7 +3,7 @@
   "subTitle": "欢迎光临我的小窝",
   "avatarUrl": "https://github.githubassets.com/favicons/favicon.svg",
   "GMEEK_VERSION": "last",
-  "allHead": "<script src=\"/js/analytics.js\"></script><script src=\"/js/comments.js\"></script>",
-  "indexStyle": "<style>\n#hitokoto-container {\n  margin-bottom: 16px;\n  padding: 12px 16px;\n  background-color: var(--color-canvas-subtle, #f6f8fa);\n  border-left: 3px solid #0969da;\n  border-radius: 4px;\n  font-size: 14px;\n  line-height: 1.6;\n  color: var(--color-fg-muted, #57606a);\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  flex-wrap: wrap;\n}\n\n#hitokoto-text {\n  flex: 1;\n  min-width: 0;\n  font-style: italic;\n}\n\n#hitokoto-from {\n  font-size: 12px;\n  color: var(--color-fg-subtle, #6e7781);\n}\n\n#hitokoto-refresh {\n  cursor: pointer;\n  color: #0969da;\n  font-size: 12px;\n  white-space: nowrap;\n  user-select: none;\n}\n\n#hitokoto-refresh:hover {\n  text-decoration: underline;\n}\n</style>",
+  "allHead": "<script src=\"https://giscus.app/client.js\" data-repo=\"Wxjxpp/blog.github.io\" data-repo-id=\"R_kgDOTdTnwA\" data-category=\"Announcements\" data-category-id=\"DIC_kwDOTdTnwM4DBoUB\" data-mapping=\"title\" data-strict=\"0\" data-reactions-enabled=\"1\" data-emit-metadata=\"0\" data-input-position=\"bottom\" data-theme=\"preferred_color_scheme\" data-lang=\"zh-CN\" crossorigin=\"anonymous\" async></script>",
+  "indexStyle": "<style>\n#hitokoto-container {\n  margin-bottom: 16px;\n  padding: 12px 16px;\n  background-color: var(--color-canvas-subtle, #f6f8fa);\n  border-left: 3px solid #0969da;\n  border-radius: 6px;\n}\n</style>",
   "indexScript": "<script src=\"/js/hitokoto.js\"></script>"
 }
