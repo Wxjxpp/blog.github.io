@@ -187,9 +187,11 @@ function modeSwitch(){
     }
 }
 function utterancesTheme(theme){
-    const message={type:'set-theme',theme: theme};
-    const iframe=document.getElementsByClassName('utterances-frame')[0];
-    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+    const iframe=document.querySelector('iframe.giscus-frame');
+    if(iframe){
+        const giscusTheme=getGiscusTheme();
+        iframe.contentWindow.postMessage({giscus:{setConfig:{theme:giscusTheme}}},'https://giscus.app');
+    }
 }
 if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
 console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
@@ -211,14 +213,18 @@ function openComments(){
     cmButton.appendChild(span);
 
     script=document.createElement("script");
-    script.setAttribute("src","https://utteranc.es/client.js");
-    script.setAttribute("repo","Wxjxpp/blog.github.io");
-    script.setAttribute("issue-term","title");
-    
-    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
-    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
-    else{script.setAttribute("theme","preferred-color-scheme");}
-    
+    script.setAttribute("src","https://giscus.app/client.js");
+    script.setAttribute("data-repo","Wxjxpp/blog.github.io");
+    script.setAttribute("data-repo-id","R_kgDOTdTnwA");
+    script.setAttribute("data-category","Announcements");
+    script.setAttribute("data-category-id","DIC_kwDOTdTnwM4DBoUB");
+    script.setAttribute("data-mapping","title");
+    script.setAttribute("data-strict","0");
+    script.setAttribute("data-reactions-enabled","1");
+    script.setAttribute("data-emit-metadata","0");
+    script.setAttribute("data-input-position","bottom");
+    script.setAttribute("data-theme",getGiscusTheme());
+    script.setAttribute("data-lang","zh-CN");
     script.setAttribute("crossorigin","anonymous");
     script.setAttribute("async","");
     cm.appendChild(script);
@@ -227,15 +233,19 @@ function openComments(){
 }
 
 function iFrameLoading(){
-    var utterances=document.getElementsByClassName('utterances');
-    if(utterances.length==1){
-        if(utterances[0].style.height!=""){
-            utterancesLoad=1;
-            int=window.clearInterval(int);
-            document.getElementById("cmButton").style.display="none";
-            console.log("utterances Load OK");
-        }
+    var giscus=document.querySelector('iframe.giscus-frame');
+    if(giscus){
+        utterancesLoad=1;
+        int=window.clearInterval(int);
+        document.getElementById("cmButton").style.display="none";
+        console.log("giscus Load OK");
     }
+}
+function getGiscusTheme(){
+    var mode=document.documentElement.getAttribute('data-color-mode');
+    if(mode==='dark'){return 'dark_dimmed';}
+    if(mode==='auto'||!mode){return 'preferred_color_scheme';}
+    return 'light';
 }
 
 
