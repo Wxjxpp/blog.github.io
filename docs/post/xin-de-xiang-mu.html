@@ -11,12 +11,12 @@
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
 <meta name="description" content="今天做了一个新的项目，用了[小米lot开发者文档](https://iot.mi.com/vela/quickapp/)作为参考，[无源流沙设计页面](https://js.design/f/a3pnSZ?p=3Qw_8jbwL0)作为UI设计参考，项目已开源至Github[BandTL](https://github.com/Wxjxpp/BandTL)
-在此感谢_NEO_姐给予我输入法方面的支持，以及_无源流沙_提供UI方面的参考，以及_**Trae**_提供代码方面的帮助和参与
+在此感谢**NEO**姐给予我输入法方面的支持，以及**无源流沙**提供UI方面的参考，以及**Trae**提供代码方面的帮助和参与
 
 目前项目停留在前瞻阶段，不过应该不要太久就能上线。">
 <meta property="og:title" content="新的项目">
 <meta property="og:description" content="今天做了一个新的项目，用了[小米lot开发者文档](https://iot.mi.com/vela/quickapp/)作为参考，[无源流沙设计页面](https://js.design/f/a3pnSZ?p=3Qw_8jbwL0)作为UI设计参考，项目已开源至Github[BandTL](https://github.com/Wxjxpp/BandTL)
-在此感谢_NEO_姐给予我输入法方面的支持，以及_无源流沙_提供UI方面的参考，以及_**Trae**_提供代码方面的帮助和参与
+在此感谢**NEO**姐给予我输入法方面的支持，以及**无源流沙**提供UI方面的参考，以及**Trae**提供代码方面的帮助和参与
 
 目前项目停留在前瞻阶段，不过应该不要太久就能上线。">
 <meta property="og:type" content="article">
@@ -80,7 +80,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
     <div id="content">
 <div class="markdown-body" id="postBody"><p>今天做了一个新的项目，用了<a href="https://iot.mi.com/vela/quickapp/" rel="nofollow">小米lot开发者文档</a>作为参考，<a href="https://js.design/f/a3pnSZ?p=3Qw_8jbwL0" rel="nofollow">无源流沙设计页面</a>作为UI设计参考，项目已开源至Github<a href="https://github.com/Wxjxpp/BandTL">BandTL</a><br>
-在此感谢_NEO_姐给予我输入法方面的支持，以及_无源流沙_提供UI方面的参考，以及_<strong>Trae</strong>_提供代码方面的帮助和参与</p>
+在此感谢<strong>NEO</strong>姐给予我输入法方面的支持，以及<strong>无源流沙</strong>提供UI方面的参考，以及<strong>Trae</strong>提供代码方面的帮助和参与</p>
 <p>目前项目停留在前瞻阶段，不过应该不要太久就能上线</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
@@ -140,7 +140,11 @@ console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 
 <script>
 document.getElementById("pathHome").setAttribute("d",IconList["home"]);
 document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
-
+cmButton=document.getElementById("cmButton");
+    span=document.createElement("span");
+    span.setAttribute("class","Counter");
+    span.innerHTML="1";
+    cmButton.appendChild(span);
 
 
 function openComments(){
