@@ -11,5 +11,5 @@
     "mode": "per_page",
     "note": "badge injected via indexScript; uses hits.seeyoufarm.com to increment counts"
   },
-  "script": "<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script>"
+  "script": "<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script>"
 }
