@@ -11,5 +11,5 @@
     "mode": "per_page",
     "note": "badge injected via indexScript; uses hits.seeyoufarm.com to increment counts"
   },
-  "script": "<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script>"
+  "script": "<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script><script>(function(){var p=document.createElement('div');p.id='reading-progress';p.style='position:fixed;right:20px;bottom:80px;padding:6px 10px;background:rgba(0,0,0,0.6);color:#fff;border-radius:15px;font-size:12px;z-index:1000;pointer-events:none;display:none;';p.innerText='0%';document.body.appendChild(p);window.addEventListener('scroll',function(){var s=window.pageYOffset||document.documentElement.scrollTop;var d=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(d>0){var r=Math.min(100,Math.max(0,Math.round((s/d)*100)));p.innerText=r+'%';p.style.display='block';}else{p.style.display='none';}});})();</script>"
 }
