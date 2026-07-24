@@ -220,6 +220,27 @@ function iFrameLoading(){
 
 
 </script>
-<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script>
+<script>
+(function() {
+  if(document.getElementById('postBody')) {
+    const shareContainer = document.createElement('div');
+    shareContainer.id = 'share-container';
+    shareContainer.innerHTML = '<a id="share-qq" href="#">分享到QQ</a><a id="share-wechat" href="#">分享到微信</a>';
+    const postBody = document.getElementById('postBody');
+    postBody.parentNode.insertBefore(shareContainer, postBody.nextSibling);
+    const title = document.querySelector('.postTitle')?.textContent || document.title;
+    const url = window.location.href;
+    document.getElementById('share-qq').onclick = function(e) {
+      e.preventDefault();
+      const qqShareUrl = 'https://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(url) + '&title=' + encodeURIComponent(title);
+      window.open(qqShareUrl, '_blank', 'width=600,height=400');
+    };
+    document.getElementById('share-wechat').onclick = function(e) {
+      e.preventDefault();
+      alert('请长按二维码或使用微信扫描分享此页面');
+    };
+  }
+})();
+</script><script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script>
 
 </html>
