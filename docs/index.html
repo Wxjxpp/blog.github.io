@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
-    <script src="https://giscus.app/client.js" data-repo="Wxjxpp/blog.github.io" data-repo-id="R_kgDOTdTnwA" data-category="Announcements" data-category-id="DIC_kwDOTdTnwM4DBoUB" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async></script><script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <script src="https://giscus.app/client.js" data-repo="Wxjxpp/blog.github.io" data-repo-id="R_kgDOTdTnwA" data-category="Announcements" data-category-id="DIC_kwDOTdTnwM4DBoUB"></script>
     <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
@@ -56,24 +56,37 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
   padding: 12px 16px;
   background-color: var(--color-canvas-subtle, #f6f8fa);
   border-left: 3px solid #0969da;
-  border-radius: 6px;
+  border-radius: 4px;
+  text-align: center;
+  font-style: italic;
+  color: var(--color-fg-default, #24292e);
 }
-/* visitor badge */
-#visitor-badge {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  background: rgba(0,0,0,0.75);
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  z-index: 9999;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+#share-container {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  text-align: center;
 }
-#visitor-badge a {
-  color: #9ecbff;
-  text-decoration: underline;
+#share-container a {
+  display: inline-block;
+  margin: 0 8px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+}
+#share-qq {
+  background-color: #0969da;
+  color: white;
+}
+#share-qq:hover {
+  background-color: #0860ca;
+}
+#share-wechat {
+  background-color: #1f883d;
+  color: white;
+}
+#share-wechat:hover {
+  background-color: #238636;
 }
 </style>
 
@@ -251,31 +264,38 @@ for(var i=0;i<iconPost.length;i++){
 
 
 </script>
-<script src="/js/hitokoto.js"></script>
-<script>
-(function () {
-  try {
-    // create a small floating badge to show visitor count
-    var badge = document.createElement('div');
-    badge.id = 'visitor-badge';
-    badge.innerHTML = '访客数：<span id="visitor-count">—</span>';
-    document.addEventListener('DOMContentLoaded', function () {
-      document.body.appendChild(badge);
+<div id="hitokoto-container"><p id="hitokoto">「一言」加载中...</p></div><div id="share-container"><a id="share-qq" href="#">分享到QQ</a><a id="share-wechat" href="#">分享到微信</a></div><script>
+// 获取一言
+(function() {
+  fetch('https://v1.hitokoto.cn?c=i')
+    .then(response => response.json())
+    .then(data => {
+      const hitokoto = document.getElementById('hitokoto');
+      hitokoto.textContent = '「' + data.hitokoto + '」 ——' + (data.from || '未知');
+    })
+    .catch(error => {
+      console.log('一言加载失败:', error);
+      document.getElementById('hitokoto').textContent = '「生活就像一场旅行，不在乎目的地，只在乎沿途的风景。」';
     });
-    // fetch and increment count (per-page key)
-    function fetchCount(incr) {
-      var key = encodeURIComponent(window.location.origin + window.location.pathname);
-      var api = 'https://hits.seeyoufarm.com/api/count/' + (incr ? 'incr' : '') + '?url=' + key + (incr ? '&amount=1' : '');
-      // if incr is false, use /api/count?url=... (no incr)
-      if (!incr) api = 'https://hits.seeyoufarm.com/api/count?url=' + key;
-      return fetch(api).then(function (res) { if (!res.ok) throw new Error(res.status); return res.json(); });
-    }
-    // increment once per load
-    fetchCount(true).then(function (data) {
-      var el = document.getElementById('visitor-count');
-      if (el) el.textContent = (typeof data.value === 'number') ? data.value.toLocaleString() : String(data.value);
-    }).catch(function (err) { console.warn('visitor count error', err); });
-  } catch (e) { console.warn('visitor script error', e); }
+})();
+
+// 分享功能
+(function() {
+  const title = document.title;
+  const url = window.location.href;
+  
+  // QQ分享
+  document.getElementById('share-qq').onclick = function(e) {
+    e.preventDefault();
+    const qqShareUrl = 'https://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(url) + '&title=' + encodeURIComponent(title);
+    window.open(qqShareUrl, '_blank', 'width=600,height=400');
+  };
+  
+  // 微信分享 - 显示提示
+  document.getElementById('share-wechat').onclick = function(e) {
+    e.preventDefault();
+    alert('请长按二维码或使用微信扫描分享此页面');
+  };
 })();
 </script>
 
