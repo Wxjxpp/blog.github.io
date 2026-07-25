@@ -3,15 +3,14 @@
   "subTitle": "欢迎光临我的小窝",
   "avatarUrl": "https://github.githubassets.com/favicons/favicon.svg",
   "GMEEK_VERSION": "last",
-  "singlePage": ["about"],
-  "allHead": "<script src=\"https://giscus.app/client.js\" data-repo=\"Wxjxpp/blog.github.io\" data-repo-id=\"R_kgDOTdTnwA\" data-category=\"Announcements\" data-category-id=\"DIC_kwDOTdTnwM4DBoUB[...]",
-  "indexStyle": "<style>\n#hitokoto-container {\n  margin-bottom: 16px;\n  padding: 12px 16px;\n  background-color: var(--color-canvas-subtle, #f6f8fa);\n  border-left: 3px solid #0969da;\n  border[...]",
-  "indexScript": "<div id=\"hitokoto-container\"><p id=\"hitokoto\">「一言」加载中...</p></div><script>\n(function() {\n  fetch('https://v1.hitokoto.cn?c=i')\n    .then(response => response.[...]",
+  "email": "wxjxpp@example.com",
+  "allHead": "<script src=\"https://giscus.app/client.js\" data-repo=\"Wxjxpp/blog.github.io\" data-repo-id=\"R_kgDOTdTnwA\" data-category=\"Announcements\" data-category-id=\"DIC_kwDOTdTnwM4DBoUB\" data-mapping=\"pathname\" data-reactions-enabled=\"1\" data-emit-metadata=\"0\" data-theme=\"preferred_color_scheme\" data-lang=\"zh-CN\" crossorigin=\"anonymous\" async></script><script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>",
+  "indexStyle": "<style>\n#hitokoto-container {\n  margin-bottom: 16px;\n  padding: 12px 16px;\n  background-color: var(--color-canvas-subtle, #f6f8fa);\n  border-left: 3px solid #0969da;\n  border-radius: 6px;\n}\n/* visitor badge */\n#visitor-badge {\n  position: fixed;\n  right: 16px;\n  bottom: 16px;\n  background: rgba(0,0,0,0.75);\n  color: #fff;\n  padding: 8px 12px;\n  border-radius: 20px;\n  font-size: 13px;\n  z-index: 9999;\n  box-shadow: 0 4px 12px rgba(0,0,0,0.15);\n}\n#visitor-badge a {\n  color: #9ecbff;\n  text-decoration: underline;\n}\n</style>",
+  "indexScript": "<script src=\"/js/hitokoto.js\"></script>\n<script>\n(function () {\n  try {\n    // create a small floating badge to show visitor count\n    var badge = document.createElement('div');\n    badge.id = 'visitor-badge';\n    badge.innerHTML = '访客数：<span id=\"visitor-count\">—</span>';\n    document.addEventListener('DOMContentLoaded', function () {\n      document.body.appendChild(badge);\n    });\n    // fetch and increment count (per-page key)\n    function fetchCount(incr) {\n      var key = encodeURIComponent(window.location.origin + window.location.pathname);\n      var api = 'https://hits.seeyoufarm.com/api/count/' + (incr ? 'incr' : '') + '?url=' + key + (incr ? '&amount=1' : '');\n      if (!incr) api = 'https://hits.seeyoufarm.com/api/count?url=' + key;\n      return fetch(api).then(function (res) { if (!res.ok) throw new Error(res.status); return res.json(); });\n    }\n    fetchCount(true).then(function (data) {\n      var el = document.getElementById('visitor-count');\n      if (el) el.textContent = (typeof data.value === 'number') ? data.value.toLocaleString() : String(data.value);\n    }).catch(function (err) { console.warn('visitor count error', err); });\n  } catch (e) { console.warn('visitor script error', e); }\n})();\n</script>",
   "visitor": {
     "provider": "seeyoufarm",
     "mode": "per_page",
-    "note": "busuanzi visitor counter - keep this"
+    "note": "badge injected via indexScript; uses hits.seeyoufarm.com to increment counts"
   },
-  "script": "<script>\n(function() {\n  if(document.getElementById('postBody')) {\n    const shareContainer = document.createElement('div');\n    shareContainer.id = 'share-container';\n    shareC[...]
-  }",
+  "script": "<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script><script>(function(){var p=document.createElement('div');p.id='reading-progress';p.style='position:fixed;right:20px;bottom:80px;padding:6px 10px;background:rgba(0,0,0,0.6);color:#fff;border-radius:15px;font-size:12px;z-index:1000;pointer-events:none;display:none;';p.innerText='0%';document.body.appendChild(p);window.addEventListener('scroll',function(){var s=window.pageYOffset||document.documentElement.scrollTop;var d=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(d>0){var r=Math.min(100,Math.max(0,Math.round((s/d)*100)));p.innerText=r+'%';p.style.display='block';}else{p.style.display='none';}});})();</script>"
 }
