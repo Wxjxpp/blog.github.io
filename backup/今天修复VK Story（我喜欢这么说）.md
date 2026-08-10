@@ -1,0 +1,4 @@
+额啊啊啊啊啊啊
+Grok4.5傻完了兄弟
+能用Gpt和Gemini就别用Grok
+哪怕你用Deepseek都要比Grok舒服
