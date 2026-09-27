@@ -41,6 +41,25 @@ jobs:
           lastTag=$(git describe --tags `git rev-list --tags --max-count=1`)
           if [ $GMEEK_VERSION == 'last' ]; then git checkout $lastTag; else git checkout $GMEEK_VERSION; fi;
 
+      - name: Patch Gmeek (skip unlabeled issues)
+        run: |
+          python3 - <<'PY'
+          path = "/opt/Gmeek/Gmeek.py"
+          with open(path, encoding="utf-8") as f:
+              src = f.read()
+          old = '            listJsonName=self.addOnePostJson(issue)\n            self.createPostHtml(self.blogBase[listJsonName]["P"+number_str])'
+          new = ('            listJsonName=self.addOnePostJson(issue)\n'
+                 '            if listJsonName is None:\n'
+                 '                print("issue #%s has no label, skip" % number_str)\n'
+                 '                return\n'
+                 '            self.createPostHtml(self.blogBase[listJsonName]["P"+number_str])')
+          assert src.count(old) == 1, "unexpected Gmeek.py runOne content"
+          src = src.replace(old, new)
+          with open(path, "w", encoding="utf-8") as f:
+              f.write(src)
+          print("patched Gmeek.py: unlabeled issues will be skipped")
+          PY
+
       - name: Install dependencies
         run: |
           pip install --upgrade pip
